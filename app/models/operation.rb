@@ -1,4 +1,4 @@
-#Operation is used to check equality of two operation objects
+#Operation is used to check equality of two operation objects and perform the operation
 class Operation
   attr_reader :operand, :operation
 
