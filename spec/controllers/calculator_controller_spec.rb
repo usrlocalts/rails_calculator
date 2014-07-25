@@ -9,5 +9,4 @@ describe CalculatorController, :type => :controller do
       expect(response.body).to eq("5.0")
     end
   end
-
 end

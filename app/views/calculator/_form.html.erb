@@ -1,0 +1,4 @@
+<%= form_tag(calculator_path, method: "put") do |form| %>
+    <%= text_field_tag(:command) %>
+    <%= submit_tag("Calculate") %>
+<% end %>
