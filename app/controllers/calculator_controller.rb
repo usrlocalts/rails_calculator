@@ -1,7 +1,7 @@
 class CalculatorController < ApplicationController
   def update
     command = params[:command]   #like $_REQUEST
-    calculator = Calculator.first || Calculator.create({:state => 0})
+    calculator = create_or_find_calculator
     parser = Parser.new(calculator)
     operation = parser.parse(command)
     @text = operation.perform_operation(calculator)
@@ -9,6 +9,10 @@ class CalculatorController < ApplicationController
   end
 
   def create
-    @text = Calculator.first.state
+    @text = create_or_find_calculator.state
+  end
+
+  def create_or_find_calculator
+    Calculator.first || Calculator.create({:state => 0})
   end
 end
