@@ -6,7 +6,7 @@ describe CalculatorController, :type => :controller do
     it "returns http success" do
       put :update, :command => "add 5"
       expect(response.status).to eq(200)
-      expect(response.body).to eq("5.0")
+      expect(assigns[:text]).to eq(5.0)
     end
   end
 end

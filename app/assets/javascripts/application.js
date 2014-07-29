@@ -13,42 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require underscore.js
 //= require_tree .
 
-var Calculator = function (commandHistoryElement) {
-    this.commandHistoryElementId = commandHistoryElement;
-    var calc = this;
-    $.ajax({
-        url: "/api/calculator_create",
-        method: "POST"
-    }).done(function (data, statusText, xhr) {
-        $("#" + calc.commandHistoryElementId).append("<h4>Calculator " + (xhr.status == 201 ? "Created" : "Found") + "</h4>");
-    })
-}
-
-Calculator.prototype = {
-    perform_calculation: function (command) {
-        var calc = this;
-        $.ajax({
-            url: "/api/calculator_update",
-            method: "PUT",
-            data: {command: command},
-            success: function (data) {
-                calc.append_history_element(data.state);
-            }
-        })
-        return false;
-    },
-    append_history_element: function (state) {
-        var elem = "<h4>Operation: " + $("#command").val() + " Value: " + (state == null ? "Undefined Operation" : state) + "</h4>";
-        $("#" + this.commandHistoryElementId).append(elem);
-    }
-}
-
-
-$(document).ready(function () {
-    var calculator = new Calculator("calculator_history");
-    $("#calculator_form").submit(function () {
-        return calculator.perform_calculation($("#command").val());
-    });
-});

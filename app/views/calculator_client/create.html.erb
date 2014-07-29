@@ -1,2 +1,11 @@
-<%= render partial: 'form' %>
-<%= render partial: 'update' %>
+<input type = "button" value="Add Calculator" id="addCalculator"/>
+
+<div class="calculatorsWrapper">
+</div>
+
+<div id = "template" style="visibility: hidden">
+  <div class = "calculator">
+    <%= render partial: 'form' %>
+    <%= render partial: 'update' %>
+  </div>
+</div>
