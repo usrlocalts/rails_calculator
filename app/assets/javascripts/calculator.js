@@ -1,6 +1,6 @@
-var Calculator = function (templateId) {
+var Calculator = function (templateId, wrapperId) {
 
-    this.calculatorWrapperElement = $(templateId).clone().appendTo(".calculatorsWrapper");
+    this.calculatorWrapperElement = $(templateId).clone().appendTo(wrapperId);
     this.commandHistoryElement = this.calculatorWrapperElement.find(".history");
     this.submitElement = this.calculatorWrapperElement.find(".submit");
     this.commandElement = this.calculatorWrapperElement.find(".command");
@@ -83,17 +83,39 @@ Calculator.prototype = {
     }
 };
 
+CalculatorGenerator = function (calculatorGeneratorId, templateId) {
+    this.calculatorGeneratorWrapper = $(calculatorGeneratorId);
+    this.addCalculatorButton = this.calculatorGeneratorWrapper.find("#addCalculator");
+    this.calculatorsWrapper = this.calculatorGeneratorWrapper.find(".calculatorsWrapper");
+    this.templateCalculator = $(templateId +" .calculator");
+    this.calculators = [];
 
-$(document).ready(function () {
-    var calculators = [];
-    $("#addCalculator").click(function () {
-        var calc = new Calculator("#template .calculator");
+    this.initialize();
+};
 
-        $.each(calculators, function (index, value) {
-            value.registerObserver(calc);
-            calc.registerObserver(value);
+CalculatorGenerator.prototype = {
+    initialize: function () {
+        this.addCalculator();
+    },
+
+    addCalculator: function () {
+        var self = this;
+        self.addCalculatorButton.click(_.bind(self.handleAddCalculatorClick, self));
+    },
+
+    handleAddCalculatorClick: function () {
+        var self = this;
+        var newCalculator = new Calculator(self.templateCalculator, self.calculatorsWrapper);
+
+        $.each(self.calculators, function (index, calculator) {
+            calculator.registerObserver(newCalculator);
+            newCalculator.registerObserver(calculator);
         });
 
-        calculators.push(calc);
-    });
+        self.calculators.push(newCalculator);
+    }
+};
+
+$(document).ready(function () {
+    var calculatorGenerator = new CalculatorGenerator("#calculatorGenerator", "#template");
 });
