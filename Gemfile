@@ -30,6 +30,8 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'devise'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
