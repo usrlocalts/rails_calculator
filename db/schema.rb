@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729110308) do
+ActiveRecord::Schema.define(version: 20140730041648) do
 
   create_table "calculators", force: true do |t|
-    t.float "state"
+    t.float   "state"
+    t.decimal "user_id"
   end
 
   create_table "users", force: true do |t|
