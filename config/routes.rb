@@ -15,7 +15,7 @@ RailsCalculator::Application.routes.draw do
     post 'calculator_create' => 'calculator#calculator_create'
   end
 
-
+  get 'angular' => 'angular_client#show'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

@@ -1,0 +1,9 @@
+<div ng-controller="CalculatorIndexController">
+  <input type="text" ng-model="commandInput">
+  <input type="button" value="Click" ng-click="update(commandInput)">
+
+  <div ng-repeat="command in commandHistory">
+    {{command }}
+  </div>
+
+</div>
